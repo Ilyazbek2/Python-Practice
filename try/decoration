@@ -1,0 +1,54 @@
+import time
+from typing import Any, Callable
+
+
+class LoggerDecorator:
+    """
+    Класс-декоратор для логирования аргументов, результата и времени выполнения функции.
+    """
+
+    def __init__(self, func: Callable):
+        """
+        Инициализация декоратора.
+        :param func: функция для декорирования
+        """
+        self.func = func
+
+    def __call__(self, *args: Any, **kwargs: Any) -> Any:
+        """
+        Вызов функции с логированием.
+        :param args: позиционные аргументы функции
+        :param kwargs: именованные аргументы функции
+        :return: результат выполнения функции
+        """
+        print(f"Вызов функции {self.func.__name__}")
+        print(f"Аргументы: {args}, {kwargs}")
+        start_time = time.time()
+        result = self.func(*args, **kwargs)
+        end_time = time.time()
+        print(f"Результат: {result}")
+        print(f"Время выполнения: {end_time - start_time} секунд")
+        return result
+
+
+# ----------------- пример использования -----------------
+@LoggerDecorator
+def complex_algorithm(arg1: int, arg2: int) -> int:
+    """
+    Пример "сложного" алгоритма.
+    :param arg1: первое число
+    :param arg2: второе число
+    :return: сумма всех комбинаций i + j
+    """
+    result = 0
+    for i in range(arg1):
+        for j in range(arg2):
+            with open('test.txt', 'w', encoding='utf8') as file:
+                file.write(str(i + j))
+            result += i + j
+    return result
+
+
+if __name__ == "__main__":
+    # Вызов функции
+    result = complex_algorithm(10, 50)
