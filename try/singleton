@@ -1,0 +1,36 @@
+from typing import Type, Any
+
+
+def singleton(cls: Type) -> Type:
+    """
+    Декоратор, превращающий класс в синглтон.
+    Гарантирует, что существует только один экземпляр класса.
+    :param cls: класс для преобразования в синглтон
+    :return: класс с гарантией одного экземпляра
+    """
+    instances: dict[Type, Any] = {}
+
+    def get_instance(*args: Any, **kwargs: Any) -> Any:
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+
+    return get_instance
+
+
+# ----------------- пример использования -----------------
+@singleton
+class Example:
+    """Пример класса-синглтона"""
+    def __init__(self) -> None:
+        print("Создание экземпляра Example")
+
+
+if __name__ == "__main__":
+    my_obj = Example()
+    my_another_obj = Example()
+
+    print(id(my_obj))
+    print(id(my_another_obj))
+
+    print(my_obj is my_another_obj)  # True
