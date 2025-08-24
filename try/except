@@ -1,0 +1,32 @@
+def get_top_shogun_info():
+    """
+    Function to display information about the most popular Shōgun adaptations.
+    Uses try/except for error handling.
+    """
+    try:
+        # Data about Shōgun adaptations
+        shogun_adaptations = [
+            {
+                "title": "Shōgun (1980 miniseries)",
+                "type": "TV miniseries",
+                "impact": "Hugely influential, adapted from James Clavell's novel, starring Richard Chamberlain. Won Emmy and Golden Globe awards.",
+            },
+            {
+                "title": "Shōgun (2024 TV series)",
+                "type": "TV series",
+                "impact": "Modern re-adaptation of Clavell’s novel, praised for historical accuracy, cinematography, and performances.",
+            }
+        ]
+
+        print("Most Popular Shōgun Adaptations:\n")
+        for adaptation in shogun_adaptations:
+            print(f"Title: {adaptation['title']}")
+            print(f"Type: {adaptation['type']}")
+            print(f"Impact: {adaptation['impact']}\n")
+
+    except Exception as e:
+        print("An error occurred while retrieving Shōgun information:", e)
+
+
+if __name__ == "__main__":
+    get_top_shogun_info()
